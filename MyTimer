@@ -1,0 +1,27 @@
+using System;
+using System.Threading;
+
+class MyTimer
+{
+    static public void time(Object stateInfo)
+    {
+        // رساله الوقت
+        Console.WriteLine(" The Time is : {0}", DateTime.Now.ToString("hh:mm:ss"));
+    }
+
+    static void Main()
+    {
+        TimerCallback callback = new TimerCallback(time);
+
+        Console.WriteLine("Creating timer: {0}\n",
+        DateTime.Now.ToString("h:mm:ss"));
+
+        // إنشاء علامة مؤقت ثانية واحدة
+        Timer stateTimer = new Timer(callback, null, 0, 1000);
+        for (; ; )
+        {
+            // مؤقت اخماد لتقليل الضغط على وحدة المعالجة المركزية
+            Thread.Sleep(100);
+        }
+    }
+}
